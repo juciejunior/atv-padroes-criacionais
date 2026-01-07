@@ -3,6 +3,7 @@ package br.edu.ifpb.ads.padroes.atv1.rpg;
 import br.edu.ifpb.ads.padroes.atv1.rpg.model.*;
 import br.edu.ifpb.ads.padroes.atv1.rpg.prototype.*;
 import br.edu.ifpb.ads.padroes.atv1.rpg.builder.*;
+import br.edu.ifpb.ads.padroes.atv1.rpg.factory.*;
 
 public class Main {
     public static void main(String[] args) {
@@ -42,5 +43,22 @@ public class Main {
                 .comAtributos(10, 10, 10, 100, 50)
                 .build();
         System.out.println("Personagem via Builder: " + pBuilder.toString());
+
+        // -------------------------------------------------------------------------------
+        // Commit 4: Padrão Abstract Factory (Famílias de Itens)
+        // -------------------------------------------------------------------------------
+        System.out.println("\n>> Teste Commit 4: Padrão Abstract Factory");
+        RacaFactory fabricaElfo = new ElfoFactory();
+        Arma armaElfo = fabricaElfo.criarArmaArqueiro();
+        Armadura armaduraElfo = fabricaElfo.criarArmaduraArqueiro();
+        System.out.println("Item Criado (Elfo): " + armaElfo.getNome());
+        System.out.println("Armadura Criada (Elfo): " + armaduraElfo.getNome());
+
+
+        RacaFactory fabricaOrc = new OrcFactory();
+        Arma armaOrc = fabricaOrc.criarArmaGuerreiro();
+        System.out.println("Item Criado (Orc): " + armaOrc.getNome());
+
+
     }
 }
