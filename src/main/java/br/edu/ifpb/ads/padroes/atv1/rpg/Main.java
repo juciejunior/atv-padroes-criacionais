@@ -2,6 +2,7 @@ package br.edu.ifpb.ads.padroes.atv1.rpg;
 
 import br.edu.ifpb.ads.padroes.atv1.rpg.model.*;
 import br.edu.ifpb.ads.padroes.atv1.rpg.prototype.*;
+import br.edu.ifpb.ads.padroes.atv1.rpg.builder.*;
 
 public class Main {
     public static void main(String[] args) {
@@ -30,5 +31,16 @@ public class Main {
         System.out.println("Clone: " + clone.getNome());
         System.out.println("Força Clone: " + clone.getForca());
 
+        // -------------------------------------------------------------------------------
+        // Commit 3: Padrão Builder
+        // -------------------------------------------------------------------------------
+        System.out.println("\n>> Teste Commit 3: Padrão Builder");
+        Personagem pBuilder = new PersonagemBuilder()
+                .comNome("Builder Man")
+                .daRaca("Humano")
+                .daClasse("Guerreiro")
+                .comAtributos(10, 10, 10, 100, 50)
+                .build();
+        System.out.println("Personagem via Builder: " + pBuilder.toString());
     }
 }
