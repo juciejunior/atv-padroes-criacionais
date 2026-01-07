@@ -1,9 +1,8 @@
 package br.edu.ifpb.ads.padroes.atv1.rpg;
 
+import br.edu.ifpb.ads.padroes.atv1.rpg.factory.abstractfactory.*;
 import br.edu.ifpb.ads.padroes.atv1.rpg.model.*;
-import br.edu.ifpb.ads.padroes.atv1.rpg.prototype.*;
 import br.edu.ifpb.ads.padroes.atv1.rpg.builder.*;
-import br.edu.ifpb.ads.padroes.atv1.rpg.factory.*;
 
 public class Main {
     public static void main(String[] args) {

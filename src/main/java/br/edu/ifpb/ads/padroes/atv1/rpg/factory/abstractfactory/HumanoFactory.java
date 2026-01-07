@@ -1,36 +1,36 @@
-package br.edu.ifpb.ads.padroes.atv1.rpg.factory;
+package br.edu.ifpb.ads.padroes.atv1.rpg.factory.abstractfactory;
 
 import br.edu.ifpb.ads.padroes.atv1.rpg.model.Arma;
 import br.edu.ifpb.ads.padroes.atv1.rpg.model.Armadura;
 
-public class OrcFactory implements RacaFactory {
+public class HumanoFactory implements RacaFactory {
     @Override
     public Arma criarArmaGuerreiro() {
-        return new Arma("Machado de Guerra", 30, "Machado");
+        return new Arma("Espada de Ferro", 25, "Espada");
     }
 
     @Override
     public Armadura criarArmaduraGuerreiro() {
-        return new Armadura("Armadura Brutal", 25, "Pesada");
+        return new Armadura("Armadura de Placas", 20, "Pesada");
     }
 
     @Override
     public Arma criarArmaMago() {
-        return new Arma("Cajado Tribal", 12, "Cajado");
+        return new Arma("Cajado Mágico", 15, "Cajado");
     }
 
     @Override
     public Armadura criarArmaduraMago() {
-        return new Armadura("Vestes Xamânicas", 6, "Leve");
+        return new Armadura("Vestes Mágicas", 8, "Leve");
     }
 
     @Override
     public Arma criarArmaArqueiro() {
-        return new Arma("Arco de Osso", 24, "Arco");
+        return new Arma("Arco Élfico", 20, "Arco");
     }
 
     @Override
     public Armadura criarArmaduraArqueiro() {
-        return new Armadura("Couro de Besta", 16, "Média");
+        return new Armadura("Armadura de Couro", 12, "Média");
     }
 }

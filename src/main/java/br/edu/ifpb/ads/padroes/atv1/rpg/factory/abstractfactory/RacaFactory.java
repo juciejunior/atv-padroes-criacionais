@@ -1,4 +1,4 @@
-package br.edu.ifpb.ads.padroes.atv1.rpg.factory;
+package br.edu.ifpb.ads.padroes.atv1.rpg.factory.abstractfactory;
 
 import br.edu.ifpb.ads.padroes.atv1.rpg.model.Arma;
 import br.edu.ifpb.ads.padroes.atv1.rpg.model.Armadura;
