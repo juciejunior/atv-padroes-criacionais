@@ -1,8 +1,10 @@
 package br.edu.ifpb.ads.padroes.atv1.rpg;
 
-import br.edu.ifpb.ads.padroes.atv1.rpg.factory.abstractfactory.*;
+
 import br.edu.ifpb.ads.padroes.atv1.rpg.model.*;
 import br.edu.ifpb.ads.padroes.atv1.rpg.builder.*;
+import br.edu.ifpb.ads.padroes.atv1.rpg.factory.abstractfactory.*;
+import br.edu.ifpb.ads.padroes.atv1.rpg.factory.method.*;
 
 public class Main {
     public static void main(String[] args) {
@@ -58,6 +60,15 @@ public class Main {
         Arma armaOrc = fabricaOrc.criarArmaGuerreiro();
         System.out.println("Item Criado (Orc): " + armaOrc.getNome());
 
+        // -------------------------------------------------------------------------------
+        // Commit 5: Padrão Factory Method
+        // -------------------------------------------------------------------------------
+        System.out.println("\n>> Teste Commit 5: Padrão Factory Method");
+        RacaFactory fabricaHumano = new HumanoFactory();
+        ClassePersonagemFactory fabricaGuerreiro = new GuerreiroFactory();
 
+        Personagem guerreiroHumano = fabricaGuerreiro.criarPersonagem("Arthur", fabricaHumano, "Humano");
+
+        System.out.println(guerreiroHumano.toString());
     }
 }
