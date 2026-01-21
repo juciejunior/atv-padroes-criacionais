@@ -2,9 +2,11 @@ package br.edu.ifpb.ads.padroes.atv1.rpg;
 
 
 import br.edu.ifpb.ads.padroes.atv1.rpg.model.*;
+import br.edu.ifpb.ads.padroes.atv1.rpg.prototype.*;
 import br.edu.ifpb.ads.padroes.atv1.rpg.builder.*;
 import br.edu.ifpb.ads.padroes.atv1.rpg.factory.abstractfactory.*;
 import br.edu.ifpb.ads.padroes.atv1.rpg.factory.method.*;
+import br.edu.ifpb.ads.padroes.atv1.rpg.singleton.*;
 
 public class Main {
     public static void main(String[] args) {
@@ -70,5 +72,15 @@ public class Main {
         Personagem guerreiroHumano = fabricaGuerreiro.criarPersonagem("Arthur", fabricaHumano, "Humano");
 
         System.out.println(guerreiroHumano.toString());
+
+        // -------------------------------------------------------------------------------
+        // Commit 6: Padrão Singleton
+        // -------------------------------------------------------------------------------
+        System.out.println("\n>> Teste Commit 6: Padrão Singleton");
+        ConfiguracaoJogo config1 = ConfiguracaoJogo.getInstance();
+        config1.setNivelDificuldade(5);
+
+        ConfiguracaoJogo config2 = ConfiguracaoJogo.getInstance();
+        System.out.println("Dificuldade na instância 2: " + config2.getNivelDificuldade());
     }
 }

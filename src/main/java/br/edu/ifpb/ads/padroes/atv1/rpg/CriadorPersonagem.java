@@ -1,140 +1,56 @@
 package br.edu.ifpb.ads.padroes.atv1.rpg;
 
-import br.edu.ifpb.ads.padroes.atv1.rpg.model.Arma;
-import br.edu.ifpb.ads.padroes.atv1.rpg.model.Armadura;
-import br.edu.ifpb.ads.padroes.atv1.rpg.model.Personagem;
+import br.edu.ifpb.ads.padroes.atv1.rpg.factory.abstractfactory.*;
+import br.edu.ifpb.ads.padroes.atv1.rpg.factory.method.*;
+import br.edu.ifpb.ads.padroes.atv1.rpg.model.*;
+
+import java.util.HashMap;
+import java.util.Map;
 
 public class CriadorPersonagem {
+    private Map<String, RacaFactory> racas;
+    private Map<String, ClassePersonagemFactory> classes;
 
-    public static Personagem criarPersonagem(String nome, String raca, String classe) {
+    public CriadorPersonagem() {
+        racas = new HashMap<>();
+        racas.put("Humano", new HumanoFactory());
+        racas.put("Elfo", new ElfoFactory());
+        racas.put("Orc", new OrcFactory());
 
-        int forca = 0, inteligencia = 0, agilidade = 0, vida = 0, mana = 0;
-        Arma arma = null;
-        Armadura armadura = null;
-        String[] habilidades = null;
+        classes = new HashMap<>();
+        classes.put("Guerreiro", new GuerreiroFactory());
+        classes.put("Mago", new MagoFactory());
+        classes.put("Arqueiro", new ArqueiroFactory());
+    }
 
-        if (raca.equals("Humano")) {
-            if (classe.equals("Guerreiro")) {
-                forca = 15;
-                inteligencia = 8;
-                agilidade = 10;
-                vida = 120;
-                mana = 30;
+    public Personagem criarPersonagem(String nome, String racaStr, String classeStr) {
+        RacaFactory racaFactory = racas.get(racaStr);
+        ClassePersonagemFactory classeFactory = classes.get(classeStr);
 
-                arma = new Arma("Espada de Ferro", 25, "Espada");
-                armadura = new Armadura("Armadura de Placas", 20, "Pesada");
-                habilidades = new String[]{"Investida", "Bloqueio"};
-
-            } else if (classe.equals("Mago")) {
-                forca = 6;
-                inteligencia = 18;
-                agilidade = 8;
-                vida = 80;
-                mana = 150;
-                arma = new Arma("Cajado Mágico", 15, "Cajado");
-                armadura = new Armadura("Vestes Mágicas", 8, "Leve");
-                habilidades = new String[]{"Bola de Fogo", "Cura"};
-
-            } else if (classe.equals("Arqueiro")) {
-                forca = 10;
-                inteligencia = 12;
-                agilidade = 16;
-                vida = 100;
-                mana = 70;
-                arma = new Arma("Arco Élfico", 20, "Arco");
-                armadura = new Armadura("Armadura de Couro", 12, "Média");
-                habilidades = new String[]{"Tiro Certeiro", "Chuva de Flechas"};
-            }
-
-        } else if (raca.equals("Elfo")) {
-            if (classe.equals("Guerreiro")) {
-                forca = 12;
-                inteligencia = 14;
-                agilidade = 16;
-                vida = 100;
-                mana = 60;
-                arma = new Arma("Lâmina Élfica", 22, "Espada");
-                armadura = new Armadura("Cota de Malha Élfica", 15, "Média");
-                habilidades = new String[]{"Dança das Lâminas", "Agilidade Élfica"};
-
-            } else if (classe.equals("Mago")) {
-                forca = 4;
-                inteligencia = 20;
-                agilidade = 14;
-                vida = 70;
-                mana = 180;
-                arma = new Arma("Cajado da Natureza", 18, "Cajado");
-                armadura = new Armadura("Mantos Élficos", 10, "Leve");
-                habilidades = new String[]{"Magia da Natureza", "Teleporte"};
-
-            } else if (classe.equals("Arqueiro")) {
-                forca = 8;
-                inteligencia = 16;
-                agilidade = 20;
-                vida = 90;
-                mana = 100;
-                arma = new Arma("Arco Longo Élfico", 28, "Arco");
-                armadura = new Armadura("Armadura de Couro Élfico", 14, "Média");
-                habilidades = new String[]{"Tiro Múltiplo", "Camuflagem"};
-            }
-
-        } else if (raca.equals("Orc")) {
-            if (classe.equals("Guerreiro")) {
-                forca = 20;
-                inteligencia = 6;
-                agilidade = 8;
-                vida = 150;
-                mana = 20;
-                arma = new Arma("Machado de Guerra", 30, "Machado");
-                armadura = new Armadura("Armadura Brutal", 25, "Pesada");
-                habilidades = new String[]{"Fúria", "Pancada Devastadora"};
-
-            } else if (classe.equals("Mago")) {
-                // PROBLEMA: Combinação estranha, mas o código permite
-                forca = 10;
-                inteligencia = 14;
-                agilidade = 6;
-                vida = 100;
-                mana = 120;
-                arma = new Arma("Cajado Tribal", 12, "Cajado");
-                armadura = new Armadura("Vestes Xamânicas", 6, "Leve");
-                habilidades = new String[]{"Magia Sombria", "Invocação"};
-
-            } else if (classe.equals("Arqueiro")) {
-                forca = 14;
-                inteligencia = 8;
-                agilidade = 12;
-                vida = 120;
-                mana = 40;
-                arma = new Arma("Arco de Osso", 24, "Arco");
-                armadura = new Armadura("Couro de Besta", 16, "Média");
-                habilidades = new String[]{"Tiro Brutal", "Intimidação"};
-            }
-        }
-
-        // Retorna null se combinação inválida
-        if (arma == null) {
-            System.out.println("Combinação inválida: " + raca + " " + classe);
+        if (racaFactory == null || classeFactory == null) {
+            System.out.println("Combinação inválida: " + racaStr + " " + classeStr);
             return null;
         }
 
-        return new Personagem(nome, raca, classe, forca, inteligencia, agilidade,
-                vida, mana, arma, armadura, habilidades);
+        return classeFactory.criarPersonagem(nome, racaFactory, racaStr);
     }
 
-    public static Personagem criarPersonagemEspecial(String nome, String raca, String classe) {
-        Personagem base = criarPersonagem(nome, raca, classe);
-        if (base == null) return null;
+    public Personagem criarPersonagemEspecial(String nome, String racaStr, String classeStr) {
+        Personagem base = criarPersonagem(nome, racaStr, classeStr);
 
-        if (raca.equals("Humano") && classe.equals("Guerreiro")) {
-            return new Personagem(nome + " o Lendário", raca, classe,
-                    18, 10, 12, 140, 40,
-                    new Arma("Excalibur", 35, "Espada"),
-                    new Armadura("Armadura do Rei", 30, "Pesada"),
-                    new String[]{"Investida", "Bloqueio", "Liderança"});
+        if (base != null && "Humano".equals(racaStr) && "Guerreiro".equals(classeStr)) {
+            Personagem lendario = base.clone();
+            lendario.setNome(nome + " o Lendário");
+            lendario.setForca(18);
+            lendario.setInteligencia(10);
+            lendario.setAgilidade(12);
+            lendario.setVida(140);
+            lendario.setMana(40);
+            lendario.setArma(new Arma("Excalibur", 35, "Espada"));
+            lendario.setArmadura(new Armadura("Armadura do Rei", 30, "Pesada"));
+            lendario.setHabilidades(new String[]{"Investida", "Bloqueio", "Liderança"});
+            return lendario;
         }
-
         return base;
     }
-
 }
